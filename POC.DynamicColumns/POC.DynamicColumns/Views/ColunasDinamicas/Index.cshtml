@@ -1,0 +1,40 @@
+﻿@model List<POC.DynamicColumns.Models.Column>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div style="width: 100%;">
+
+    @{
+        foreach (var item in Model)
+        {
+            @:<div style="display: inline-block;">
+
+                var grid = new WebGrid(item.Rows);
+                @grid.GetHtml(
+
+                    tableStyle: "grid",
+                    fillEmptyRows: false,
+                    headerStyle: "gvHeading",
+                    alternatingRowStyle: "gvAlternateRow",
+                    rowStyle: "gvRow",
+                    footerStyle: "gvFooter",
+                    mode: WebGridPagerModes.All,
+                    firstText: "<< Primeiro",
+                    previousText: "< Anterior",
+                    nextText: "Próximo >",
+                    lastText: "Último >>",
+                    columns: new[] {
+                        grid.Column("Value",header: item.Name)
+                    }
+                )
+
+            @:</div>
+        }
+
+    }
+
+</div>
